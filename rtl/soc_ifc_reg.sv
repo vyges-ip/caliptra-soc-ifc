@@ -7028,6 +7028,7 @@ module soc_ifc_reg (
             field_storage.intr_block_rf.error_internal_intr_r.error_wdt_timer1_timeout_sts.value <= field_combo.intr_block_rf.error_internal_intr_r.error_wdt_timer1_timeout_sts.next;
         end
     end
+    assign hwif_out.intr_block_rf.error_internal_intr_r.error_wdt_timer1_timeout_sts.value = field_storage.intr_block_rf.error_internal_intr_r.error_wdt_timer1_timeout_sts.value;
     // Field: soc_ifc_reg.intr_block_rf.error_internal_intr_r.error_wdt_timer2_timeout_sts
     always_comb begin
         automatic logic [0:0] next_c;
@@ -7054,6 +7055,7 @@ module soc_ifc_reg (
             field_storage.intr_block_rf.error_internal_intr_r.error_wdt_timer2_timeout_sts.value <= field_combo.intr_block_rf.error_internal_intr_r.error_wdt_timer2_timeout_sts.next;
         end
     end
+    assign hwif_out.intr_block_rf.error_internal_intr_r.error_wdt_timer2_timeout_sts.value = field_storage.intr_block_rf.error_internal_intr_r.error_wdt_timer2_timeout_sts.value;
     assign hwif_out.intr_block_rf.error_internal_intr_r.intr =
         |(field_storage.intr_block_rf.error_internal_intr_r.error_internal_sts.value & field_storage.intr_block_rf.error_intr_en_r.error_internal_en.value)
         || |(field_storage.intr_block_rf.error_internal_intr_r.error_inv_dev_sts.value & field_storage.intr_block_rf.error_intr_en_r.error_inv_dev_en.value)
@@ -8654,7 +8656,7 @@ module soc_ifc_reg (
     for(genvar i0=0; i0<2; i0++) begin
         assign readback_array[i0*1 + 51][31:0] = (decoded_reg_strb.CPTRA_GENERIC_OUTPUT_WIRES[i0] && !decoded_req_is_wr) ? field_storage.CPTRA_GENERIC_OUTPUT_WIRES[i0].generic_wires.value : '0;
     end
-    assign readback_array[53][15:0] = (decoded_reg_strb.CPTRA_HW_REV_ID && !decoded_req_is_wr) ? 16'h12 : '0;
+    assign readback_array[53][15:0] = (decoded_reg_strb.CPTRA_HW_REV_ID && !decoded_req_is_wr) ? 16'h22 : '0;
     assign readback_array[53][31:16] = (decoded_reg_strb.CPTRA_HW_REV_ID && !decoded_req_is_wr) ? hwif_in.CPTRA_HW_REV_ID.SOC_STEPPING_ID.next : '0;
     for(genvar i0=0; i0<2; i0++) begin
         assign readback_array[i0*1 + 54][31:0] = (decoded_reg_strb.CPTRA_FW_REV_ID[i0] && !decoded_req_is_wr) ? field_storage.CPTRA_FW_REV_ID[i0].REV_ID.value : '0;
